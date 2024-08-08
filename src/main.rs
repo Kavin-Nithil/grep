@@ -23,7 +23,13 @@ struct Config {
 }
 
 impl Config {
-    fn new(args: &String) -> Config {
+    fn new(args: &[String]) -> Config {
+        if args.len() < 3 {
+            panic!("Not enough arguments.");
+        } else if args.len() > 3 {
+            panic!("Extra arguments provided");
+        }
+
         let query = args[1].clone();
         let file_path = args[2].clone();
 
@@ -32,11 +38,4 @@ impl Config {
             file_path
         }
     }
-}
-
-fn parse_config(args: &[String]) -> Config {
-    let query = args[1].clone();
-    let file_path = args[2].clone();
-
-    Config {query, file_path}
 }
